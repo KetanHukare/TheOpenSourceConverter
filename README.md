@@ -1,6 +1,6 @@
 ODG TO BMP CONVERTER
 
-NAME: Ketan Girish Hukare
+NAME: Ketan Girish Hukare \n
 BRANCH: SY COMPUTER ENGINEER
 MIS: 111503032
 

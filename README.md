@@ -1,6 +1,12 @@
+NAME: Ketan Girish Hukare
+BRANCH: SY COMPUTER ENGINEER
+MIS: 111503032
+
+DISCRIPTION:
 This is an image converter from odg to bmp.
-The odg format is a vector represented format and it is stored in xml.
-So far, parsing of the unzipped odg is done.
-Also, an all together new bmp image is created. 
-The only part remains is to link the odg information to bmp creation, i.e. The Bridge.
-Submitted file is an example of bmp file using my own idea and not what the odg is about.
+This converter uses expat.h libraby to parse the xml imformation stored in .odg files.
+The renaming of files, zipping and unzipping, everything is automated.
+bmp file is made using a 2-D array. The height and width of bmp is adjusted according to the size of odg image.
+The bmp so formed will be purely be result of a 2D array and not any other graphic libraby. I have tried to make it as original as possible.
+
+I hope you find my project intresting.

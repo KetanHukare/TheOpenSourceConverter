@@ -41,8 +41,6 @@ startElement(void *userData, const char *name, const char **atts)
 			printf("%f\n", store[j]);
 	}
 	if(!(strcmp(name, "draw:custom-shape"))) {
-		//	puts("rectangle");
-		//	printf("%s\n%s\n%s\n%s\n", atts[7], atts[9], atts[11], atts[13]);
 		strcpy(value, atts[7]);
 		strtok(value, "c");
 		//strcpy(token, value);
@@ -63,11 +61,6 @@ startElement(void *userData, const char *name, const char **atts)
 		//strcpy(token, convert4);
 		val = atof(value);
 		store[3] = val * 10;
-		//			printf("%s = %f\n", atts[13], (val*10));
-		//			puts("stored values");
-		//			for(j = 0; j < 4; j++)
-		//				printf("%f\n", store[j]);
-
 	}
 	if(!(strcmp(name, "draw:enhanced-geometry"))) {
 		i = 0;
@@ -118,18 +111,18 @@ main(int argc, char *argv[])
 	strcat(file_unzip, rename1);
 	mymv(argv[1], rename1);
 	system(file_unzip);
-	printf("test1\n");
+	//printf("test1\n");
 	strcpy(chartarget, name);
 	strcat(chartarget, "/");
 	strcat(chartarget, "content.xml");
-	printf("test2\n");
+	//printf("test2\n");
 	fd1 = fopen("content.xml", "r");
-	printf("test3\n");
+	//printf("test3\n");
 	strcat(name, ".bmp");
 	imgptr->filename = (char *)malloc(sizeof(strlen(name)+1));
-	printf("test4\n");
+	//printf("test4\n");
 	strcpy(imgptr->filename, name);
-	printf("test5\n");
+	//printf("test5\n");
 	XML_SetElementHandler(parser, startElement, endElement);
 	do {
 		int len = (int)fread(buf, 1, sizeof(buf), fd1);

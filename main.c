@@ -17,8 +17,7 @@
 float store[10];
 bmp *imgptr;
 	static void XMLCALL
-startElement(void *userData, const char *name, const char **atts)
-{
+startElement(void *userData, const char *name, const char **atts) {
 	int i = 0, j = 0;
 	float val;
 	char value[128], token[100], *convert, *convert1, *convert2, *convert3, *convert4;
@@ -84,26 +83,25 @@ startElement(void *userData, const char *name, const char **atts)
 }
 
 	static void XMLCALL
-endElement(void *userData, const char *name)
-{
+endElement(void *userData, const char *name) {
 	int *depthPtr = (int *)userData;
 	*depthPtr -= 1;
 }
 
-	int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	char buf[BUFSIZ], *rename, name[128], rename1[50], file_unzip[55], file_zip[55], chartarget[128];
 	FILE *fd, *fd1;
 	fd = fopen(argv[1], "r");
+	if(fd == NULL || (!strcmp(argv[1], "-h"))) {
+		printf("usage: ./project <fileName>\n");
+		exit(1);
+	}
 	XML_Parser parser = XML_ParserCreate(NULL);
 	int done;
-	printf("test0\n");
 	imgptr = (bmp *)malloc(sizeof(bmp));
 	int depth = 0;
 	XML_SetUserData(parser, &depth);
 	strcpy(file_unzip,"unzip ");
-
 	strcpy(name, argv[1]);
 	rename = strtok(name, ".");
 	strcpy(rename1, rename);
@@ -111,18 +109,13 @@ main(int argc, char *argv[])
 	strcat(file_unzip, rename1);
 	mymv(argv[1], rename1);
 	system(file_unzip);
-	//printf("test1\n");
 	strcpy(chartarget, name);
 	strcat(chartarget, "/");
 	strcat(chartarget, "content.xml");
-	//printf("test2\n");
 	fd1 = fopen("content.xml", "r");
-	//printf("test3\n");
 	strcat(name, ".bmp");
 	imgptr->filename = (char *)malloc(sizeof(strlen(name)+1));
-	//printf("test4\n");
 	strcpy(imgptr->filename, name);
-	//printf("test5\n");
 	XML_SetElementHandler(parser, startElement, endElement);
 	do {
 		int len = (int)fread(buf, 1, sizeof(buf), fd1);

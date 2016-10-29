@@ -1,19 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"data.h"
-
-
 void make_bmp(bmp *ptr){
 	FILE *fp;
 	fp;
-	if((fp=fopen(ptr->filename ,"wb+"))==NULL)
-	{
+	if((fp=fopen(ptr->filename ,"wb+"))==NULL) {
 		printf("error to open c:\\a.bmp!");
 		exit(1);
 	}
 
-	struct Bimap_File_Header
-	{
+	struct Bimap_File_Header {
 		unsigned short bftype; 
 		unsigned long bfsize; 
 		unsigned short bfreserved1;
@@ -27,15 +23,12 @@ void make_bmp(bmp *ptr){
 	bfh.bfreserved2=0;
 	bfh.bfoffbits=0x3e;
 
-	struct Bitmap_File_Info_Header
-	{
+	struct Bitmap_File_Info_Header {
 		unsigned long bfihsize;
 		unsigned long width;   
 		unsigned long height;  
 		unsigned short biplanes; 
 		unsigned short bibitcount;
-
-
 		unsigned long bicompression;
 		unsigned long bisizeimage;
 		unsigned long bixpelspermeter;
@@ -76,8 +69,7 @@ void make_bmp(bmp *ptr){
 	fwrite(&bfih.biclrused,4,1,fp);
 	fwrite(&bfih.biclrimportant,4,1,fp);
 
-	struct RGB
-	{
+	struct RGB {
 		unsigned short Blue;
 		unsigned short Green;
 		unsigned short Red;
@@ -105,16 +97,12 @@ void make_bmp(bmp *ptr){
 
 	int i,j,k=0,n=0,m=0,c,b[32];
 
-	for(i=h-1;i>=0;i--,j=0)
-	{
-		if(w%32==0)
-		{
-			for(j=0;j<w;j++)
-			{
+	for(i=h-1;i>=0;i--,j=0) {
+		if(w%32==0) {
+			for(j=0;j<w;j++) {
 				k=ptr->a[i][j]+k*2;
 				m++;
-				if(m%8==0)
-				{
+				if(m%8==0) {
 					fwrite(&k,1,1,fp);
 					k=0;
 					m=0;
@@ -123,18 +111,13 @@ void make_bmp(bmp *ptr){
 			}
 		}
 
-		else
-		{
-
-			if(w>=32)
-			{
+		else {
+			if(w>=32) {
 				n=w%32;
-				for(j=0;j<w-n;j++)
-				{
+				for(j=0;j<w-n;j++) {
 					k=ptr->a[i][j]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -142,8 +125,7 @@ void make_bmp(bmp *ptr){
 				}
 
 
-				for(c=0;c<32;c++,j++)
-				{
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -151,12 +133,10 @@ void make_bmp(bmp *ptr){
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -164,10 +144,8 @@ void make_bmp(bmp *ptr){
 				}
 
 			}
-			else
-			{
-				for(c=0;c<32;c++,j++)
-				{
+			else {
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -175,12 +153,10 @@ void make_bmp(bmp *ptr){
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -197,11 +173,9 @@ void make_bmp(bmp *ptr){
 
 void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 	int i, j, k=0,n=0,m=0,c,b[32];
-	//	int a[h][w], k=0,n=0,m=0,c,b[32];
 	FILE *fp;
 	fp = fopen(ptr->filename, "wb+");
-	struct Bimap_File_Header
-	{
+	struct Bimap_File_Header {
 		unsigned short bftype; 
 		unsigned long bfsize; 
 		unsigned short bfreserved1;
@@ -215,8 +189,7 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 	bfh.bfreserved2=0;
 	bfh.bfoffbits=0x3e;
 
-	struct Bitmap_File_Info_Header
-	{
+	struct Bitmap_File_Info_Header {
 		unsigned long bfihsize;
 		unsigned long width;   
 		unsigned long height;  
@@ -264,8 +237,7 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 	fwrite(&bfih.biclrused,4,1,fp);
 	fwrite(&bfih.biclrimportant,4,1,fp);
 
-	struct RGB
-	{
+	struct RGB {
 		unsigned short Blue;
 		unsigned short Green;
 		unsigned short Red;
@@ -302,16 +274,12 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 
 
 
-	for(i=h-1;i>=0;i--,j=0)
-	{
-		if(w%32==0)
-		{
-			for(j=0;j<w;j++)
-			{
+	for(i=h-1;i>=0;i--,j=0) {
+		if(w%32==0) {
+			for(j=0;j<w;j++) {
 				k=ptr->a[i][j]+k*2;
 				m++;
-				if(m%8==0)
-				{
+				if(m%8==0) {
 					fwrite(&k,1,1,fp);
 					k=0;
 					m=0;
@@ -320,18 +288,13 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 			}
 		}
 
-		else
-		{
-
-			if(w>=32)
-			{
+		else {
+			if(w>=32) {
 				n=w%32;
-				for(j=0;j<w-n;j++)
-				{
+				for(j=0;j<w-n;j++) {
 					k=ptr->a[i][j]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -339,8 +302,7 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 				}
 
 
-				for(c=0;c<32;c++,j++)
-				{
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -348,12 +310,10 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -361,10 +321,8 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 				}
 
 			}
-			else
-			{
-				for(c=0;c<32;c++,j++)
-				{
+			else {
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -372,12 +330,10 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -390,16 +346,13 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 	}
 
 	fclose(fp);
-
 }
 
 void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 	int i, j, k=0,n=0,m=0,c,b[32];
-	//	int i, j;
 	FILE *fp;
 	fp = fopen(ptr->filename, "wb+");
-	struct Bimap_File_Header
-	{
+	struct Bimap_File_Header {
 		unsigned short bftype; 
 		unsigned long bfsize; 
 		unsigned short bfreserved1;
@@ -413,8 +366,7 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 	bfh.bfreserved2=0;
 	bfh.bfoffbits=0x3e;
 
-	struct Bitmap_File_Info_Header
-	{
+	struct Bitmap_File_Info_Header {
 		unsigned long bfihsize;
 		unsigned long width;   
 		unsigned long height;  
@@ -462,8 +414,7 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 	fwrite(&bfih.biclrused,4,1,fp);
 	fwrite(&bfih.biclrimportant,4,1,fp);
 
-	struct RGB
-	{
+	struct RGB {
 		unsigned short Blue;
 		unsigned short Green;
 		unsigned short Red;
@@ -498,16 +449,12 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 	for(i = (x + height), j = y; j < (y + width); j++)
 		ptr->a[i][j] = 1;
 
-	for(i=h-1;i>=0;i--,j=0)
-	{
-		if(w%32==0)
-		{
-			for(j=0;j<w;j++)
-			{
+	for(i=h-1;i>=0;i--,j=0) {
+		if(w%32==0) {
+			for(j=0;j<w;j++) {
 				k=ptr->a[i][j]+k*2;
 				m++;
-				if(m%8==0)
-				{
+				if(m%8==0) {
 					fwrite(&k,1,1,fp);
 					k=0;
 					m=0;
@@ -516,18 +463,13 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 			}
 		}
 
-		else
-		{
-
-			if(w>=32)
-			{
+		else {
+			if(w>=32) {
 				n=w%32;
-				for(j=0;j<w-n;j++)
-				{
+				for(j=0;j<w-n;j++) {
 					k=ptr->a[i][j]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -535,8 +477,7 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 				}
 
 
-				for(c=0;c<32;c++,j++)
-				{
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -544,12 +485,10 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -557,10 +496,8 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 				}
 
 			}
-			else
-			{
-				for(c=0;c<32;c++,j++)
-				{
+			else {
+				for(c=0;c<32;c++,j++) {
 					if(j<w)
 						b[c]=ptr->a[i][j];
 					else
@@ -568,12 +505,10 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 				}
 
 
-				for(c=0;c<32;c++)
-				{
+				for(c=0;c<32;c++) {
 					k=b[c]+k*2;
 					m++;
-					if(m%8==0)
-					{
+					if(m%8==0) {
 						fwrite(&k,1,1,fp);
 						k=0;
 						m=0;
@@ -586,16 +521,4 @@ void make_rectangle(bmp *ptr, int width, int height, int y, int x) {
 	}
 
 	fclose(fp);
-
 }
-
-
-
-
-
-
-
-
-
-
-

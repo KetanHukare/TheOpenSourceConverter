@@ -39,7 +39,7 @@ startElement(void *userData, const char *name, const char **atts) {
 	char value[128], token[100], *convert, *convert1, *convert2, *convert3, *convert4;
 	int *depthPtr = (int *)userData;
 	if(!(strcmp(name, "draw:line"))) { 
-		puts(name);
+//		puts(name);
 		while(atts[i] != NULL) {
 			if(!((strcmp(atts[i], "svg:x1"))&&(strcmp(atts[i], "svg:y1")) && (strcmp(atts[i], "svg:x2")) && (strcmp(atts[i], "svg:y2")) )) {
 				strcpy(value, atts[i+1]);
@@ -51,9 +51,18 @@ startElement(void *userData, const char *name, const char **atts) {
 			}
 			i++;
 		}
+		j = 0;
+		while(j < 2) {
+			if(store[j] > store[j + 2]) {
+				temp = store[j + 2];
+				store[j + 2] = store[j];
+				store[j] = temp;
+			} 
+			j++;
+		}
 		make_line(imgptr, store[0], store[1], store[2], store[3]);
-		for(j = 0; j < 4; j++)
-			printf("%f\n", store[j]);
+//		for(j = 0; j < 4; j++)
+//			printf("%f\n", store[j]);
 	}
 	if(!(strcmp(name, "draw:custom-shape"))) {
 		strcpy(value, atts[7]);
@@ -81,9 +90,9 @@ startElement(void *userData, const char *name, const char **atts) {
 		i = 0;
 		while(atts[i] != NULL) {
 			if(!(strcmp("draw:type", atts[i]))) {
-				printf("%s\n", atts[i+1]);
-				for(j = 0; j < 4; j++)
-					printf("%f\n", store[j]);
+//				printf("%s\n", atts[i+1]);
+//				for(j = 0; j < 4; j++)
+//					printf("%f\n", store[j]);
 				break;
 			}
 			i++;

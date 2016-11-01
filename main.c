@@ -154,6 +154,10 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 	} while (!done);
+	system("rm *.xml");
+	system("rm -R META-INF");
+	system("rm -R Configurations2");
+	system("rm mimetype");
 	XML_ParserFree(parser);
 	return 0;
 }

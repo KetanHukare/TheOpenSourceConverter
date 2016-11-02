@@ -115,8 +115,7 @@ int main(int argc, char *argv[]) {
 	fd = fopen(argv[1], "r");
 	if(fd == NULL || (!strcmp(argv[1], "-h"))) {
 		printf("usage: ./project <fileName>\n");
-		if(!(strcmp(argv[1], "-h")))
-			printf("This program works perfectly for horizontal, vertical lines and all types of rectangle\n");
+		printf("This program works perfectly for horizontal, vertical lines and all types of rectangle\n");
 		exit(1);
 	}
 	XML_Parser parser = XML_ParserCreate(NULL);

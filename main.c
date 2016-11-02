@@ -34,9 +34,9 @@ float store[10];
 bmp *imgptr;
 	static void XMLCALL
 startElement(void *userData, const char *name, const char **atts) {
-	int i = 0, j = 0;
+	int i = 0, j = 0, temp;
 	float val;
-	char value[128], token[100], *convert, *convert1, *convert2, *convert3, *convert4;
+	char value[128], token[100], *convert;
 	int *depthPtr = (int *)userData;
 	if(!(strcmp(name, "draw:line"))) { 
 //		puts(name);
@@ -67,22 +67,18 @@ startElement(void *userData, const char *name, const char **atts) {
 	if(!(strcmp(name, "draw:custom-shape"))) {
 		strcpy(value, atts[7]);
 		strtok(value, "c");
-		//strcpy(token, value);
 		val = atof(value);
 		store[0] = val * 10;
 		strcpy(value, atts[9]);
 		strtok(value, "c");
-		//strcpy(token, convert2);
 		val = atof(value);
 		store[1] = val * 10;
 		strcpy(value, atts[11]);
 		strtok(value, "c");
-		//strcpy(token, convert3);
 		val = atof(value);
 		store[2] = val * 10;
 		strcpy(value, atts[13]);
 		strtok(value, "c");
-		//strcpy(token, convert4);
 		val = atof(value);
 		store[3] = val * 10;
 	}

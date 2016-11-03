@@ -277,16 +277,11 @@ void make_line(bmp *ptr, int x1, int y1, int x2, int y2) {
 	fwrite(&rgb1.Red,1,1,fp);
 	fwrite(&rgb1.Reserved,1,1,fp);
 
-
-	for(i = 0; i < h; i++){
-		for(j = 0; j < w; j++) {
-			if(((x2 -x1)*(y1 - i) == (y2 - y1)*(x1 - j)) && ((i) >= y1) && ((i) <= y2)) {
-				ptr->a[i][j] = 1;
-			}	
+	for(i = y1; i <= y2; i++) {
+		for(j = x1; j <= x2; j++) {
+			ptr->a[i][j] = 1;
 		}
-	}	
-
-
+	}
 
 	for(i=h-1;i>=0;i--,j=0) {
 		if(w%32==0) {
